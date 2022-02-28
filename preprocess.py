@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 import tushare as ts
-
 from datetime import datetime
 
 # Tushare API init
-my_token = '3bacccb4cbb243e8f073c7933773638ced4d3995bccf2202977a890b'
+my_token = 'fce2186abb3aa71fa472c6762b0f79244960ab004cf97ef77352ec92'
 ts.set_token(my_token)
 pro = ts.pro_api()
 
@@ -20,14 +19,16 @@ def get_data(stock_basket, back_test_start_date, back_test_end_date):
     """
     for i in range(len(stock_basket)):
         df = pro.daily(ts_code=stock_basket[i], start_date=back_test_start_date, end_date=back_test_end_date,
-                   fields='ts_code, trade_date, close')
-        if i == 0:
+                       fields='ts_code, trade_date, close')
+        if i != 0:
+            pass
+        else:
             time_period = []
             for j in range(len(df)):
-                time_period.append(df.iloc[j, 1]) # trade date
+                time_period.append(df.iloc[j, 1])  # trade date
             data = pd.DataFrame(columns=stock_basket, index=time_period)
         for k in range(len(time_period)):
-            data.iloc[k, i] = df.iloc[k, 2] # close price
+            data.iloc[k, i] = df.iloc[k, 2]  # close price
     return data
 
 
@@ -59,6 +60,6 @@ def st_time(stock_code, back_test_start_date, back_test_end_date):
             print(st_start, "|", st_end)
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
     # get_data(['000001.SZ', '600000.SH'], '20160101', '20211231')
     # st_time('000005.SZ', '20160101', '20211231')
