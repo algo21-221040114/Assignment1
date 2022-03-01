@@ -1,34 +1,43 @@
-# Feature Selection for Random Forest
+import pandas as pd
+import numpy as np
+
+para_year = ['2016', '2017', '2018', '2019', '2020', '2021']
 para_m = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
           40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240]
 
+
+# Feature selection for random forest
+
+
 # Intraday returns
-def intraday_return(para_m, T):
-    ir_list = []
-    for t in range(241, T):
-        for m in para_m:
-            ir = (data.iloc[t-m, -1]/data.iloc[t-m, 0])-1
-            ir_list.append(ir)
-    return ir_list
+def intraday_ret(t):
+    data_open = pd.read_csv('./Open_price.csv', index_col='Date')
+    data_close = pd.read_csv('./Adj_close_price.csv', index_col='Date')
+    data_intraday_ret = pd.DataFrame(columns=data_open.columns, index=para_m)
+    for i in range(data_intraday_ret.shape[1]):
+        for j in range(data_intraday_ret.shape[0]):
+            data_intraday_ret.iloc[j, i] = (data_close.iloc[t-para_m[j]-1, i] / data_open.iloc[t-para_m[j]-1, i]) - 1
+    return data_intraday_ret
 
 
 # Returns with respect to last closing price
-def ret_last_close(para_m, T):
-    cr_list = []
-    for t in range(241, T):
-        for m in para_m:
-            cr = (data.iloc[t-1, -1] / data.iloc[t-1-m, -1]) - 1
-            cr_list.append(cr)
-    return cr_list
+def ret_last_close(t):
+    data_close = pd.read_csv('./Adj_close_price.csv', index_col='Date')
+    data_cr_ret = pd.DataFrame(columns=data_close.columns, index=para_m)
+    for i in range(data_cr_ret.shape[1]):
+        for j in range(data_cr_ret.shape[0]):
+            data_cr_ret.iloc[j, i] = (data_close.iloc[t-2, i] / data_close.iloc[t-para_m[j]-2, i]) - 1
+    return data_cr_ret
+
 
 # Returns with respect to opening price:
-def ret_open(para_m, T):
-    or_list = []
-    for t in range(241, T):
-        for m in para_m:
-            open_r = (data.iloc[t, 0] / data.iloc[t-m, -1]) - 1
-            or_list.append(open_r)
-    return or_list
+def ret_open(t):
+    data_open = pd.read_csv('./Open_price.csv', index_col='Date')
+    data_close = pd.read_csv('./Adj_close_price.csv', index_col='Date')
+    data_or_ret = pd.DataFrame(columns=data_open.columns, index=para_m)
+    for i in range(data_or_ret.shape[1]):
+        for j in range(data_or_ret.shape[0]):
+            data_or_ret.iloc[j, i] = (data_open.iloc[t-1, i] / data_close.iloc[t-para_m[j]-1, i]) - 1
+    return data_or_ret
 
-# Feature Selection for LSTM
-def order():
+# Feature selection for LSTM
