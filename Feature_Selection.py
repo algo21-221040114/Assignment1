@@ -41,10 +41,14 @@ def open_ret(t):
 
 # Feature selection for LSTM
 def feature_lstm(t, stock_num):
+    data_open = pd.read_csv('./Open_price.csv', index_col='Date')
+    data_close = pd.read_csv('./Adj_close_price.csv', index_col='Date')
     f_lstm = []
     for i in range(240):
+        f = [data_close.iloc[t - 2, stock_num] / data_open.iloc[t - 2, stock_num] - 1,
+             data_close.iloc[t - 2, stock_num] / data_close.iloc[t - 3, stock_num] - 1,
+             data_open.iloc[t - 1, stock_num] / data_close.iloc[t - 2, stock_num] - 1]
         # m = 1
-        f = [intraday_ret(t-i).iloc[0, stock_num], close_ret(t-i).iloc[0, stock_num], open_ret(t-i).iloc[0, stock_num]]
         # Robust Scaler standardization
         for j in range(len(f)):
             f[j] = (f[j]-np.median(f))/(np.max(f)-np.min(f))
