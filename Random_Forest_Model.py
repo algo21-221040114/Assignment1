@@ -35,7 +35,7 @@ clf = RandomForestClassifier(n_estimators=100, criterion='gini', max_depth=5, ma
 clf.fit(x, y.values.ravel())
 # print(clf.feature_importances_)
 
-# Test set and Predction
+# Test set and Prediction
 for t in range(754, 755):
     df1 = pd.DataFrame(intraday_ret(t).values.T)
     df2 = pd.DataFrame(close_ret(t).values.T)
