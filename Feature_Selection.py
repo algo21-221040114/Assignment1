@@ -45,13 +45,16 @@ def feature_lstm(t, stock_num):
     data_close = pd.read_csv('./Adj_close_price.csv', index_col='Date')
     f_lstm = []
     for i in range(240):
-        f = [data_close.iloc[t - 2, stock_num] / data_open.iloc[t - 2, stock_num] - 1,
-             data_close.iloc[t - 2, stock_num] / data_close.iloc[t - 3, stock_num] - 1,
-             data_open.iloc[t - 1, stock_num] / data_close.iloc[t - 2, stock_num] - 1]
+        f = [data_close.iloc[t - i - 2, stock_num] / data_open.iloc[t - i - 2, stock_num] - 1,
+             data_close.iloc[t - i - 2, stock_num] / data_close.iloc[t - i - 3, stock_num] - 1,
+             data_open.iloc[t - i - 1, stock_num] / data_close.iloc[t - i - 2, stock_num] - 1]
         # m = 1
         # Robust Scaler standardization
+        a = np.median(f)
+        b = np.max(f)
+        c = np.min(f)
         for j in range(len(f)):
-            f[j] = (f[j]-np.median(f))/(np.max(f)-np.min(f))
+            f[j] = (f[j]-a)/(b-c)
         f_lstm.append(f)
     return f_lstm
 
