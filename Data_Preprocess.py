@@ -2,10 +2,10 @@ import pandas as pd
 from pandas_datareader import data
 import datetime
 
-# Define the instruments to download.  S&P500
+# Define the instruments to download.  randomly selected from S&P500
 stock_basket = ['AAPL', 'FLS', 'GME', 'HRL', 'HSY', 'MSFT', 'SPG', 'SPY', 'TER', 'X']
 start_date = datetime.datetime(2016, 1, 4)
-end_date = datetime.datetime(2021, 12, 31)
+end_date = datetime.datetime(2019, 12, 31)
 
 # Build empty data set
 data_open = pd.DataFrame()
@@ -16,6 +16,8 @@ for i in range(len(stock_basket)):
     df = data.DataReader(stock_basket[i], 'yahoo', start_date, end_date)
     data_open[stock_basket[i]] = pd.DataFrame(df['Open'])
     data_close[stock_basket[i]] = pd.DataFrame(df['Adj Close'])
+# print(data_open.shape[0])
+# print(len(data_open['2019']))
 
 # Save data
 data_open.to_csv('Open_price.csv', sep=',', header=True, index=True)
