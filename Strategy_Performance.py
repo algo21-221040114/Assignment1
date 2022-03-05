@@ -2,6 +2,13 @@ import pandas as pd
 
 
 def strategy_performance(buy_order_list, sell_order_list, max_t):
+    """
+
+    :param buy_order_list: the stock number to buy
+    :param sell_order_list:  the stock number to sell
+    :param max_t: the test starting date
+    :return: the buy-sell portfolio average daily return (or cumulative return)
+    """
     data_open = pd.read_csv('./Open_price.csv', index_col='Date')
     data_close = pd.read_csv('./Adj_close_price.csv', index_col='Date')
     portfolio_ret = []
