@@ -34,8 +34,8 @@ available for you to enhance model efficiency.
 
 ## Conclusion
 
-The Random Forest model performs better, providing average daily return about 6.69% in the test data, compared with -4.17%, 
-the average daily return in 2019 of all stocks. However, the LSTM model always divide stocks into two classes with the probability around 50%. One reason may be that 
+The Random Forest model performs better, providing average daily return about 13.88% in the test data, compared with -6.18%, 
+the average daily return in 2019 of ten stocks. However, the LSTM model always divide stocks into two classes with the probability around 50%. One reason may be that 
 after Robust Standardisation, the 3-dimension features have little difference, and after 240 iterations, the difference 
 may be eliminated again. New features should be consideration for the LSTM model. Also, with more rolling training periods 
 supported with GPU, the LSTm may perform better.
