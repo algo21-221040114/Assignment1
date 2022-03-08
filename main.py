@@ -6,7 +6,7 @@ from LSTM_Model import lstm
 
 # Define the instruments to download.  randomly selected from S&P500
 # Define dataset time period
-stock_basket = ['AAPL', 'FLS', 'GME', 'HRL', 'HSY', 'MSFT', 'SPG', 'SPY', 'TER', 'X']
+stock_basket = ['AAPL', 'FLS', 'GME', 'HRL', 'HSY', 'MSFT', 'SPG', 'SUN', 'TER', 'X']
 start_date = datetime.datetime(2016, 1, 4)
 end_date = datetime.datetime(2019, 12, 31)
 
