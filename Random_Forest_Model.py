@@ -9,6 +9,9 @@ import pandas as pd
 def random_forest(train_min_t, train_max_t, test_max_t, estimators, depth, features):
     """
 
+    :param train_min_t: the beginning date of train
+    :param train_max_t:  the end date of train
+    :param test_max_t:  the end date of test
     :param estimators: n_estimators, parameter for Random Forest
     :param depth: max_depth, parameter for Random Forest
     :param features: max_feature, parameter for Random Forest

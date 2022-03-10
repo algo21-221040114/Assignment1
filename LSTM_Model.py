@@ -11,6 +11,16 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # only for Mac
 
 
 def lstm(train_min_t, train_max_t, test_max_t, stock_num, node1, node2):
+    """
+
+    :param train_min_t: the beginning date of train
+    :param train_max_t:  the end date of train
+    :param test_max_t:  the end date of test
+    :param stock_num:  the number of total stocks
+    :param node1: output_size parameter
+    :param node2: output_size parameter
+    :return: the buy-sell portfolio average daily return (or cumulative return)
+    """
     # Training set, Target
     target = pd.read_csv('./Target.csv', index_col='Date')
     y = []

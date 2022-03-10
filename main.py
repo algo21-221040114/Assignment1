@@ -22,8 +22,8 @@ max_dep = 4
 max_fea = 9
 
 # LSTM Parameters
-node1 = 16  # LSTM parameter
-node2 = 2  # LSTM parameter
+node1 = 16
+node2 = 2
 
 
 if __name__ == "__main__":
